@@ -58,35 +58,52 @@ npm install next-sanity @sanity/image-url react-icons clsx tailwind-merge
 
 ### Phase 3: Shopping Cart & State Management
 **Goal:** Allow users to collect items and persist them across sessions.
+**Status:** ✅ Complete
 
-| ID | Task | Dependencies | Technical Details | Output/Artifacts |
-| :--- | :--- | :--- | :--- | :--- |
-| **3.1** | Cart Context Setup | 1.1 | Create `context/CartContext.tsx`. Use `createContext`, `useReducer` or `useState`. Define types: `CartItem` (id, name, price, qty, image). | Global State Provider |
-| **3.2** | LocalStorage Persistence | 3.1 | Implement `useEffect` to load/save cart state to `localStorage`. | Persistent Cart |
-| **3.3** | Add to Cart Logic | 3.1 | In `Product Detail Page`, connect "Add to Cart" button to Context. Handle duplicate items (increment qty). | "Add" Functionality |
-| **3.4** | Cart UI (Drawer/Modal) | 3.3 | Create `components/CartDrawer.tsx`. List items, show total price, delete item button, qty +/- controls. | Functional Cart UI |
+| ID | Task | Status | Dependencies | Technical Details | Output/Artifacts |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **3.0** | Theme Context & Switcher | ✅ Done | 2.2 | Create `context/ThemeContext.tsx`. Support "Default" and "Sage Green" themes. Add switcher to Navbar. | Theme Switcher, Sage Theme |
+| **3.1** | Cart Context Setup | ✅ Done | 1.1 | Create `context/CartContext.tsx`. Use `createContext`, `useReducer` or `useState`. Define types: `CartItem` (id, name, price, qty, image). | Global State Provider |
+| **3.2** | LocalStorage Persistence | ✅ Done | 3.1 | Implement `useEffect` to load/save cart state to `localStorage`. | Persistent Cart |
+| **3.3** | Add to Cart Logic | ✅ Done | 3.1 | In `Product Detail Page`, connect "Add to Cart" button to Context. Handle duplicate items (increment qty). | "Add" Functionality |
+| **3.4** | Cart UI (Drawer/Modal) | ✅ Done | 3.3 | Create `components/CartDrawer.tsx`. List items, show total price, delete item button, qty +/- controls. | Functional Cart UI |
 
 ### Phase 4: Checkout Logic ("Checkout to Messenger")
 **Goal:** Implement the order summary generation and deep linking.
+**Status:** ✅ Complete
 
-| ID | Task | Dependencies | Technical Details | Output/Artifacts |
-| :--- | :--- | :--- | :--- | :--- |
-| **4.1** | Environment Variables | None | Set `NEXT_PUBLIC_WHATSAPP_NUMBER` and `NEXT_PUBLIC_MESSENGER_USERNAME` in `.env.local`. | Configured Env |
-| **4.2** | Message Formatter | 3.1 | Create `lib/formatOrder.ts`. Input: `CartItem[]`. Output: Formatted string (as defined in Architecture Plan). | Helper Function |
-| **4.3** | Link Generator | 4.2 | Create `lib/generateLinks.ts`. Returns `https://wa.me/...` and `https://m.me/...`. URL Encode the message. | Helper Function |
-| **4.4** | Checkout Component | 4.3 | Update `CartDrawer`. Add "Checkout" button. Create logic to choose WA vs Messenger. | Checkout UI |
-| **4.5** | **Address Gap**: Fallback UI | 4.4 | Implement a "Copy Order Text" button for users whose deep links fail (e.g., desktop Messenger issues). | Robustness Feature |
-| **4.6** | Cleanup Cart | 4.4 | Optional: Clear cart logic after user clicks "Send Order" (consider UX - maybe ask confirmation). | Cart Clearing Logic |
+| ID | Task | Status | Dependencies | Technical Details | Output/Artifacts |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **4.1** | Environment Variables | ✅ Done | None | Set `NEXT_PUBLIC_WHATSAPP_NUMBER` and `NEXT_PUBLIC_MESSENGER_USERNAME` in `.env.local`. | Configured Env |
+| **4.2** | Message Formatter | ✅ Done | 3.1 | Create `lib/formatOrder.ts`. Input: `CartItem[]`. Output: Formatted string (as defined in Architecture Plan). | Helper Function |
+| **4.3** | Link Generator | ✅ Done | 4.2 | Create `lib/generateLinks.ts`. Returns `https://wa.me/...` and `https://m.me/...`. URL Encode the message. | Helper Function |
+| **4.4** | Checkout Component | ✅ Done | 4.3 | Update `CartDrawer`. Add "Checkout" button. Create logic to choose WA vs Messenger. | Checkout UI |
+| **4.5** | **Address Gap**: Fallback UI | ✅ Done | 4.4 | Implement a "Copy Order Text" button for users whose deep links fail (e.g., desktop Messenger issues). | Robustness Feature |
+| **4.6** | Cleanup Cart | ✅ Done | 4.4 | Optional: Clear cart logic after user clicks "Send Order" (consider UX - maybe ask confirmation). | Cart Clearing Logic |
 
 ### Phase 5: Deployment & Handoff
 **Goal:** Launch the site and ensure the admin can manage it.
+**Status:** ✅ Complete
 
-| ID | Task | Dependencies | Technical Details | Output/Artifacts |
-| :--- | :--- | :--- | :--- | :--- |
-| **5.1** | Vercel Deployment | All | Connect GitHub repo to Vercel. Add Environment Variables in Vercel Dashboard. | Live URL |
-| **5.2** | Sanity CORS Config | 5.1 | Add Vercel domain to Sanity project's CORS origins to allow frontend data fetching. | Allowed Origin |
-| **5.3** | Admin User Setup | 1.2 | Invite "Sister" email to Sanity project with Editor role. | User Invitation |
-| **5.4** | Documentation | All | Write `README.md` with "How to Update Products" guide for the client. | User Manual |
+| ID | Task | Status | Dependencies | Technical Details | Output/Artifacts |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **5.1** | Vercel Deployment | ✅ Done | All | Connect GitHub repo to Vercel. Add Environment Variables in Vercel Dashboard. | Live URL |
+| **5.2** | Sanity CORS Config | ✅ Done | 5.1 | Add Vercel domain to Sanity project's CORS origins to allow frontend data fetching. Env vars verified in `sanity.config.ts` and `src/sanity/env.ts`. | Allowed Origin |
+| **5.3** | Admin User Setup | ✅ Done | 1.2 | Invite "Sister" email to Sanity project with Editor role. | User Invitation |
+| **5.4** | Documentation | ✅ Done | All | Write `README.md` with "How to Update Products" guide and Deployment Guide for the client. | User Manual |
+
+### Phase 6: UI/UX Enhancements & Fixes
+**Goal:** Improve user experience with theme functionality, contact information, and animations.
+**Status:** 🔜 Planned
+
+| ID | Task | Status | Dependencies | Technical Details | Output/Artifacts |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **6.1** | Fix Theme Switcher | 🔜 Pending | 3.0 | Debug and fix theme switcher functionality. Ensure clicking the switcher properly toggles to sage green theme. Verify theme persistence across page navigation. | Working Theme Toggle |
+| **6.2** | Light/Dark Mode Toggle | 🔜 Pending | 6.1 | Implement light and dark mode options with beautiful, aesthetic icons that match the site's design. Consider using moon/sun icons or similar. Ensure smooth transitions between modes. | Light/Dark Mode System |
+| **6.3** | Add Contact Information | 🔜 Pending | 2.2 | Add contact details to the site: Phone: 09264163675, Location: Calbayog City (free delivery within Calbayog). Consider adding to footer or contact section. | Contact Info Display |
+| **6.4** | Social Media "Coming Soon" UI | 🔜 Pending | 2.2 | Implement user-friendly messaging for social media links that aren't available yet. Add tooltips or modal showing "Coming Soon" instead of broken/missing links. Keep the UI elements but make them informative rather than functional. | "Coming Soon" Indicators |
+| **6.5** | Add Site Animations | 🔜 Pending | 2.3, 2.4, 2.6 | Implement animations throughout the app to enhance user experience. Consider: page transitions, product card hover effects, cart drawer slide-in, add-to-cart button feedback, hero section entrance animations. Use Framer Motion or CSS animations. | Animated UI Elements |
+| **6.6** | Add Developer Credit | 🔜 Pending | 2.2 | Add subtle developer attribution in footer or about section. Include link to GitHub profile (https://github.com/MasuRii) with avatar image (https://avatars.githubusercontent.com/u/21298898?v=4). Keep it discreet and professional (e.g., "Developed by MasuRii" with small icon/link). | Developer Attribution |
 
 ## 4. Addressing Knowledge Gaps
 

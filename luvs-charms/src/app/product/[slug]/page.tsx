@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { notFound } from 'next/navigation';
+import AddToCartButton from '@/components/AddToCartButton';
 
 interface Product {
   _id: string;
@@ -150,16 +151,15 @@ export default async function ProductDetailPage({
               </div>
 
               {/* Add to Cart Button */}
-              <button
-                disabled={isOutOfStock}
-                className={`w-full py-4 px-6 rounded-lg font-semibold text-white transition-all duration-300 mb-6 ${
-                  isOutOfStock
-                    ? 'bg-gray-300 cursor-not-allowed'
-                    : 'bg-pink-600 hover:bg-pink-700 hover:shadow-lg active:scale-95'
-                }`}
-              >
-                {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
-              </button>
+              <AddToCartButton
+                product={{
+                  id: product._id,
+                  name: product.name,
+                  price: product.price,
+                  image: imageUrl,
+                }}
+                isOutOfStock={isOutOfStock}
+              />
 
               {/* Description */}
               {product.description && product.description.length > 0 && (

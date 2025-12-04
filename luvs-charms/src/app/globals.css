@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
-:root {
+/* Default Theme */
+:root,
+[data-theme="default"] {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #db2777;
+  --primary-hover: #be185d;
+  --secondary: #6b7280;
+  --accent: #f9a8d4;
+  --card-bg: #ffffff;
+  --navbar-bg: #ffffff;
+  --border: #e5e7eb;
+}
+
+/* Sage Green Theme */
+[data-theme="sage"] {
+  --background: #F0F4F0;
+  --foreground: #2d3319;
+  --primary: #8A9A5B;
+  --primary-hover: #6f7d4a;
+  --secondary: #5a6847;
+  --accent: #b8c99d;
+  --card-bg: #fafcfa;
+  --navbar-bg: #ffffff;
+  --border: #d4e0c1;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-card-bg: var(--card-bg);
+  --color-navbar-bg: var(--navbar-bg);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

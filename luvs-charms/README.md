@@ -78,6 +78,109 @@ From here, you can:
 *   Manage **Categories**.
 *   Update stock status (`In Stock`, `Out of Stock`, `Pre-order`).
 
+## 🚀 Deployment Guide
+
+This project is designed to be deployed on [Vercel](https://vercel.com/), which provides seamless Next.js hosting and automatic deployments from GitHub.
+
+### Required Environment Variables
+
+Before deploying, ensure the following environment variables are configured in your deployment platform (e.g., Vercel Dashboard):
+
+```env
+# Sanity CMS Configuration
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+
+# Checkout Configuration (for WhatsApp/Messenger ordering)
+NEXT_PUBLIC_WHATSAPP_NUMBER=639123456789
+NEXT_PUBLIC_MESSENGER_USERNAME=your.messenger.username
+```
+
+**Variable Details:**
+
+*   **`NEXT_PUBLIC_SANITY_PROJECT_ID`**: Your Sanity project ID (found in Sanity dashboard at [sanity.io/manage](https://sanity.io/manage)).
+*   **`NEXT_PUBLIC_SANITY_DATASET`**: The dataset name (typically `production`).
+*   **`NEXT_PUBLIC_WHATSAPP_NUMBER`**: WhatsApp business number in international format without `+` or spaces (e.g., `639123456789` for Philippines).
+*   **`NEXT_PUBLIC_MESSENGER_USERNAME`**: Facebook Messenger username (the part after `m.me/`).
+
+### Deploying to Vercel
+
+1.  **Connect Repository:**
+    *   Log in to [Vercel](https://vercel.com/).
+    *   Click "Add New Project" and import your GitHub repository.
+
+2.  **Configure Environment Variables:**
+    *   In the Vercel project settings, go to "Environment Variables".
+    *   Add all required variables listed above.
+
+3.  **Deploy:**
+    *   Vercel will automatically build and deploy your project.
+    *   Your live site will be available at `https://your-project.vercel.app`.
+
+4.  **Configure Sanity CORS:**
+    *   Go to [sanity.io/manage](https://sanity.io/manage) → Select your project → API → CORS Origins.
+    *   Add your Vercel deployment URL (e.g., `https://your-project.vercel.app`).
+    *   This allows your frontend to fetch data from Sanity.
+
+## 📖 How to Update Products (Admin Guide)
+
+This section is for the site administrator (Sister) to manage products, categories, and inventory.
+
+### Accessing the Admin Dashboard
+
+1.  **Navigate to the Studio:**
+    *   Visit `https://your-site-url.vercel.app/studio` (or `http://localhost:3000/studio` for local development).
+
+2.  **Log In:**
+    *   Use your Sanity.io account credentials.
+    *   If you haven't been invited yet, ask the developer to add your email as an Editor in the Sanity project settings.
+
+### Adding a New Product
+
+1.  In the Sanity Studio, click **"Product"** in the left sidebar.
+2.  Click **"Create New"** (or the `+` icon).
+3.  Fill in the product details:
+    *   **Name**: Product title (e.g., "Sage Green Charm Bracelet").
+    *   **Slug**: Auto-generated from the name (used in the URL). Click "Generate" if needed.
+    *   **Images**: Upload product photos by clicking "Upload" or drag-and-drop.
+    *   **Price**: Enter the price in Philippine Pesos (₱).
+    *   **Description**: Add product details, care instructions, or customization options.
+    *   **Category**: Select or create a category (e.g., "Bracelets", "Necklaces").
+    *   **Stock Status**: Choose from:
+        *   `In Stock` - Product is available for immediate purchase.
+        *   `Out of Stock` - Product is unavailable (greyed out on the site).
+        *   `Pre-order` - Product can be ordered but will ship later.
+4.  Click **"Publish"** to make the product live on the website.
+
+### Editing an Existing Product
+
+1.  In the Studio, click **"Product"** in the sidebar.
+2.  Select the product you want to edit from the list.
+3.  Make your changes (update price, images, description, stock status, etc.).
+4.  Click **"Publish"** to save and update the live site.
+
+### Managing Categories
+
+1.  Click **"Category"** in the sidebar.
+2.  Click **"Create New"** to add a category (e.g., "Earrings", "Rings").
+3.  Enter:
+    *   **Title**: Category name.
+    *   **Slug**: Auto-generated URL-friendly name.
+4.  Click **"Publish"**.
+5.  You can now assign products to this category when editing them.
+
+### Updating Stock Status
+
+*   When a product sells out, edit the product and change **Stock Status** to `Out of Stock`.
+*   When restocked, change it back to `In Stock`.
+*   The website will automatically reflect these changes (customers won't be able to add out-of-stock items to their cart).
+
+### Tips
+
+*   **Use High-Quality Images**: Product photos should be clear and well-lit.
+*   **Write Detailed Descriptions**: Help customers understand the product (materials, size, care instructions).
+*   **Check Regularly**: Review the Studio periodically to update stock and add new products.
+
 ## 📂 Project Structure
 
 ```text
