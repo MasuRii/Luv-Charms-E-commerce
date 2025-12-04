@@ -6,6 +6,9 @@ import { PortableText } from '@portabletext/react';
 import { notFound } from 'next/navigation';
 import AddToCartButton from '@/components/AddToCartButton';
 
+// Force dynamic rendering to always fetch fresh data
+export const dynamic = 'force-dynamic';
+
 interface Product {
   _id: string;
   name: string;
@@ -29,6 +32,8 @@ interface Product {
   }>;
   category: string;
   stockStatus: 'inStock' | 'outOfStock' | 'preOrder';
+  isFeatured?: boolean;
+  isPopular?: boolean;
 }
 
 async function getProduct(slug: string): Promise<Product | null> {
@@ -40,10 +45,12 @@ async function getProduct(slug: string): Promise<Product | null> {
     description,
     images,
     "category": category->title,
-    stockStatus
+    stockStatus,
+    isFeatured,
+    isPopular
   }`;
   
-  return await client.fetch(query, { slug });
+  return await client.fetch(query, { slug }, { cache: 'no-store' });
 }
 
 export default async function ProductDetailPage({
@@ -131,6 +138,28 @@ export default async function ProductDetailPage({
 
             {/* Product Information */}
             <div className="flex flex-col">
+              {/* Popular/Featured Badges */}
+              <div className="flex flex-wrap gap-2 mb-3">
+                {product.isPopular && (
+                  <span
+                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-bold text-white shadow-md"
+                    style={{ background: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)' }}
+                  >
+                    <span>🔥</span>
+                    Most Popular
+                  </span>
+                )}
+                {product.isFeatured && !product.isPopular && (
+                  <span
+                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-bold text-white shadow-md"
+                    style={{ background: 'linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)' }}
+                  >
+                    <span>⭐</span>
+                    Featured
+                  </span>
+                )}
+              </div>
+
               <h1 className="text-3xl font-bold mb-4" style={{ color: 'var(--foreground)' }}>
                 {product.name}
               </h1>
@@ -152,20 +181,9 @@ export default async function ProductDetailPage({
                 {getStockBadge()}
               </div>
 
-              {/* Add to Cart Button */}
-              <AddToCartButton
-                product={{
-                  id: product._id,
-                  name: product.name,
-                  price: product.price,
-                  image: imageUrl,
-                }}
-                isOutOfStock={isOutOfStock}
-              />
-
               {/* Description */}
               {product.description && product.description.length > 0 && (
-                <div className="prose prose-sm max-w-none">
+                <div className="prose prose-sm max-w-none mb-6">
                   <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--foreground)' }}>
                     Description
                   </h2>
@@ -174,6 +192,19 @@ export default async function ProductDetailPage({
                   </div>
                 </div>
               )}
+
+              {/* Add to Cart Button - Now at the bottom */}
+              <div className="mt-auto">
+                <AddToCartButton
+                  product={{
+                    id: product._id,
+                    name: product.name,
+                    price: product.price,
+                    image: imageUrl,
+                  }}
+                  isOutOfStock={isOutOfStock}
+                />
+              </div>
             </div>
           </div>
         </div>

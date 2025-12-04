@@ -69,6 +69,20 @@ export const productType = defineType({
       initialValue: 'inStock',
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'isFeatured',
+      title: 'Featured Product',
+      description: 'Show this product in the featured section on the home page',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'isPopular',
+      title: 'Most Popular',
+      description: 'Mark this product as most popular (will appear first in featured and show a badge)',
+      type: 'boolean',
+      initialValue: false,
+    }),
   ],
   preview: {
     select: {
@@ -76,11 +90,17 @@ export const productType = defineType({
       media: 'images.0',
       price: 'price',
       stockStatus: 'stockStatus',
+      isFeatured: 'isFeatured',
+      isPopular: 'isPopular',
     },
     prepare(selection) {
-      const { title, media, price, stockStatus } = selection
+      const { title, media, price, stockStatus, isFeatured, isPopular } = selection
+      const badges = []
+      if (isPopular) badges.push('🔥 Popular')
+      if (isFeatured) badges.push('⭐ Featured')
+      const badgeText = badges.length > 0 ? ` [${badges.join(', ')}]` : ''
       return {
-        title: title,
+        title: `${title}${badgeText}`,
         subtitle: `₱${price} - ${stockStatus}`,
         media: media,
       }

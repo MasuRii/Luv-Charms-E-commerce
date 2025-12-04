@@ -43,7 +43,7 @@ export default function CartDrawer() {
           
           {/* Drawer */}
           <motion.div
-            className="fixed right-0 top-0 h-full w-full sm:max-w-md shadow-xl z-50"
+            className="fixed right-0 top-0 h-full w-[85vw] max-w-md shadow-xl z-50"
             style={{ backgroundColor: 'var(--card-bg)' }}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}

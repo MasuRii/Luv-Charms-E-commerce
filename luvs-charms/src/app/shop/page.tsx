@@ -1,6 +1,9 @@
 import { client } from '@/sanity/lib/client';
 import ProductCard from '@/components/ProductCard';
 
+// Force dynamic rendering to always fetch fresh data
+export const dynamic = 'force-dynamic';
+
 interface Product {
   _id: string;
   name: string;
@@ -15,18 +18,27 @@ interface Product {
       _type: string;
     };
   }>;
+  isFeatured?: boolean;
+  isPopular?: boolean;
 }
 
 async function getProducts(): Promise<Product[]> {
-  const query = `*[_type == "product"] | order(_createdAt desc) {
+  // Order by isPopular first, then isFeatured, then by creation date
+  const query = `*[_type == "product"] | order(isPopular desc, isFeatured desc, _createdAt desc) {
     _id,
     name,
     slug,
     price,
-    images
+    images,
+    isFeatured,
+    isPopular
   }`;
   
-  return await client.fetch(query);
+  return await client.fetch(
+    query,
+    {},
+    { cache: 'no-store' } // Always fetch fresh data, no caching
+  );
 }
 
 export default async function ShopPage() {

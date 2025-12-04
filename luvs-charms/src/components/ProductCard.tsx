@@ -19,6 +19,8 @@ interface Product {
       _type: string;
     };
   }>;
+  isFeatured?: boolean;
+  isPopular?: boolean;
 }
 
 interface ProductCardProps {
@@ -48,6 +50,38 @@ export default function ProductCard({ product }: ProductCardProps) {
         whileTap={{ scale: 0.98 }}
       >
         <div className="relative aspect-square overflow-hidden" style={{ backgroundColor: 'var(--border)' }}>
+          {/* Most Popular Badge */}
+          {product.isPopular && (
+            <div className="absolute top-2 left-2 z-10">
+              <motion.div
+                initial={{ scale: 0, rotate: -10 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: "spring", stiffness: 500, damping: 25 }}
+                className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold text-white shadow-lg"
+                style={{ background: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)' }}
+              >
+                <span className="text-sm">🔥</span>
+                <span>Most Popular</span>
+              </motion.div>
+            </div>
+          )}
+          
+          {/* Featured Badge (only show if not popular) */}
+          {product.isFeatured && !product.isPopular && (
+            <div className="absolute top-2 left-2 z-10">
+              <motion.div
+                initial={{ scale: 0, rotate: -10 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: "spring", stiffness: 500, damping: 25 }}
+                className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold text-white shadow-lg"
+                style={{ background: 'linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)' }}
+              >
+                <span className="text-sm">⭐</span>
+                <span>Featured</span>
+              </motion.div>
+            </div>
+          )}
+          
           <motion.div
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.4 }}
