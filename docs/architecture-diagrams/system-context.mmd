@@ -1,0 +1,18 @@
+C4Context
+    title System Context Diagram for Luv's Charms
+
+    Person(shopper, "Shopper", "Browses products and places orders via chat")
+    Person(sister, "Sister (Admin)", "Manages products and receives orders")
+
+    System_Boundary(luvs_charms, "Luv's Charms E-commerce") {
+        System(nextjs_app, "Next.js Storefront", "Displays products, cart, and checkout logic. Hosted on Vercel.")
+        SystemDb(sanity_cms, "Sanity.io CMS", "Stores product data, images, and categories.")
+    }
+
+    System_Ext(messenger, "WhatsApp / Messenger", "Communication channel for order placement and payment coordination")
+
+    Rel(shopper, nextjs_app, "Browses, Adds to Cart", "HTTPS")
+    Rel(shopper, messenger, "Sends pre-filled order message", "Deep Link")
+    Rel(sister, sanity_cms, "Updates products, prices, stock", "Sanity Studio")
+    Rel(sister, messenger, "Receives order, sends GCash QR, confirms payment", "Manual")
+    Rel(nextjs_app, sanity_cms, "Fetches content", "GROQ/API")

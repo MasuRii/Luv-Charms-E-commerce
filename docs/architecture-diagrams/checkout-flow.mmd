@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant User as Shopper
+    participant App as Next.js App
+    participant WA as Messenger/WhatsApp
+    participant Sister as Sister (Seller)
+
+    User->>App: Adds items to Cart
+    User->>App: Clicks "Checkout"
+    App->>App: Format Order Message\n(Items, Total, ID)
+    App->>App: Generate Deep Link\n(wa.me or m.me)
+    App->>WA: Redirects with pre-filled text
+    User->>WA: Hits "Send"
+    WA->>Sister: Delivers Message\n"Hi, buying: Item A..."
+    Sister->>User: Replies with GCash QR / Total
+    User->>Sister: Sends Payment Screenshot
+    Sister->>Sister: Marks order complete (Manual)
