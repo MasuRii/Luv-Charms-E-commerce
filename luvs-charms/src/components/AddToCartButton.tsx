@@ -36,12 +36,17 @@ export default function AddToCartButton({ product, isOutOfStock }: AddToCartButt
       disabled={isOutOfStock}
       className={`w-full py-4 px-6 rounded-lg font-semibold text-white transition-all duration-300 mb-6 ${
         isOutOfStock
-          ? 'bg-gray-300 cursor-not-allowed'
-          : isAdded
-          ? 'bg-green-600 hover:bg-green-700'
-          : 'bg-pink-600 hover:bg-pink-700 hover:shadow-lg'
+          ? 'cursor-not-allowed'
+          : 'hover:shadow-lg'
       }`}
-      whileHover={!isOutOfStock ? { scale: 1.02 } : {}}
+      style={{
+        backgroundColor: isOutOfStock
+          ? 'var(--border)'
+          : isAdded
+          ? '#16a34a'
+          : 'var(--primary)'
+      }}
+      whileHover={!isOutOfStock ? { scale: 1.02, filter: 'brightness(1.1)' } : {}}
       whileTap={!isOutOfStock ? { scale: 0.95 } : {}}
       animate={isAdded ? {
         scale: [1, 1.1, 1],

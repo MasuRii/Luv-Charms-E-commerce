@@ -1,17 +1,19 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
+import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const [showSocialModal, setShowSocialModal] = useState(false);
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
 
   const socialIcons = [
-    { name: "Facebook", icon: "📘", hoverColor: "#1877f2" },
-    { name: "Instagram", icon: "📷", hoverColor: "#e4405f" },
-    { name: "TikTok", icon: "🎵", hoverColor: "#000000" },
-    { name: "Twitter", icon: "🐦", hoverColor: "#1da1f2" },
+    { name: "Facebook", Icon: FaFacebookF, hoverColor: "#1877f2" },
+    { name: "Instagram", Icon: FaInstagram, hoverColor: "#e4405f" },
+    { name: "TikTok", Icon: FaTiktok, hoverColor: "#000000" },
+    { name: "Twitter", Icon: FaXTwitter, hoverColor: "#1da1f2" },
   ];
 
   const handleSocialClick = () => {
@@ -35,12 +37,12 @@ export default function Footer() {
                   href="tel:09264163675"
                   className="hover:text-primary transition-colors"
                 >
-                  09264163675
+                  (+63) 9264163675
                 </a>
               </p>
               <p className="flex items-center justify-center md:justify-start gap-2">
                 <span className="text-xl">📍</span>
-                <span>Calbayog City</span>
+                <span>Calbayog City, Philippines</span>
               </p>
               <p className="text-sm text-accent italic">
                 Free delivery within Calbayog
@@ -54,26 +56,35 @@ export default function Footer() {
               Connect With Us
             </h3>
             <div className="flex justify-center gap-4">
-              {socialIcons.map((social) => (
-                <div key={social.name} className="relative group">
-                  <button
-                    onClick={handleSocialClick}
-                    onMouseEnter={() => setHoveredIcon(social.name)}
-                    onMouseLeave={() => setHoveredIcon(null)}
-                    className="text-3xl hover:scale-110 transition-transform cursor-pointer opacity-70 hover:opacity-100"
-                    aria-label={`${social.name} - Coming Soon`}
-                  >
-                    {social.icon}
-                  </button>
-                  {/* Tooltip on hover */}
-                  {hoveredIcon === social.name && (
-                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-foreground text-background px-3 py-1.5 rounded-md text-sm whitespace-nowrap z-10 shadow-lg">
-                      Coming Soon
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-foreground"></div>
-                    </div>
-                  )}
-                </div>
-              ))}
+              {socialIcons.map((social) => {
+                const IconComponent = social.Icon;
+                return (
+                  <div key={social.name} className="relative group">
+                    <button
+                      onClick={handleSocialClick}
+                      onMouseEnter={() => setHoveredIcon(social.name)}
+                      onMouseLeave={() => setHoveredIcon(null)}
+                      className="w-10 h-10 flex items-center justify-center rounded-full bg-secondary/20 text-secondary hover:scale-110 hover:rotate-6 transition-all duration-300 cursor-pointer border border-border hover:border-primary"
+                      style={{
+                        color:
+                          hoveredIcon === social.name
+                            ? social.hoverColor
+                            : undefined,
+                      }}
+                      aria-label={`${social.name} - Coming Soon`}
+                    >
+                      <IconComponent className="w-5 h-5" />
+                    </button>
+                    {/* Tooltip on hover */}
+                    {hoveredIcon === social.name && (
+                      <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-foreground text-background px-3 py-1.5 rounded-md text-sm whitespace-nowrap z-10 shadow-lg">
+                        Coming Soon
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-foreground"></div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
             {/* Modal notification */}
             {showSocialModal && (
@@ -102,8 +113,7 @@ export default function Footer() {
         {/* Bottom Bar - Developer Credit */}
         <div className="pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-secondary">
-            © {new Date().getFullYear()} Luv&apos;s Charms. All rights
-            reserved.
+            © {new Date().getFullYear()} Luv&apos;s Charms. All rights reserved.
           </p>
 
           {/* Developer Credit */}

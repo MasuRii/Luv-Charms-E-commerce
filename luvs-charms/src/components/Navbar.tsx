@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTheme } from '@/context/ThemeContext';
 import { useCart } from '@/context/CartContext';
 
@@ -14,8 +15,21 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo/Title */}
           <div className="flex-shrink-0">
-            <Link href="/" className="text-2xl font-bold transition-colors" style={{ color: 'var(--primary)' }}>
-              Luv&apos;s Charms
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/LuvCharmLogoNoBG.png"
+                alt="Luv's Charms"
+                width={120}
+                height={50}
+                className="h-12 w-auto"
+                priority
+              />
+              <span
+                className="text-xl font-semibold transition-colors"
+                style={{ color: 'var(--foreground)' }}
+              >
+                Luv&apos;s Charms
+              </span>
             </Link>
           </div>
 

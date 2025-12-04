@@ -36,17 +36,18 @@ export default function ProductCard({ product }: ProductCardProps) {
       className="block"
     >
       <motion.div
-        className="group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm"
+        className="group overflow-hidden rounded-lg border shadow-sm"
+        style={{ borderColor: 'var(--border)', backgroundColor: 'var(--card-bg)' }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        whileHover={{ 
+        whileHover={{
           scale: 1.03,
           boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.2)"
         }}
         whileTap={{ scale: 0.98 }}
       >
-        <div className="relative aspect-square overflow-hidden bg-gray-100">
+        <div className="relative aspect-square overflow-hidden" style={{ backgroundColor: 'var(--border)' }}>
           <motion.div
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.4 }}
@@ -62,17 +63,21 @@ export default function ProductCard({ product }: ProductCardProps) {
           </motion.div>
         </div>
         <div className="p-4">
-          <h3 className="text-lg font-semibold text-gray-900 line-clamp-2 mb-2">
+          <h3 className="text-lg font-semibold line-clamp-2 mb-2" style={{ color: 'var(--foreground)' }}>
             {product.name}
           </h3>
-          <p className="text-xl font-bold text-pink-600">
+          <p className="text-xl font-bold" style={{ color: 'var(--primary)' }}>
             ₱{product.price.toFixed(2)}
           </p>
-          <motion.button 
-            className="mt-3 w-full rounded-md bg-pink-600 px-4 py-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
-            whileHover={{ 
-              backgroundColor: "#be185d",
-              boxShadow: "0 4px 12px rgba(219, 39, 119, 0.3)"
+          <motion.button
+            className="mt-3 w-full rounded-md px-4 py-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2"
+            style={{
+              backgroundColor: 'var(--primary)',
+              '--tw-ring-color': 'var(--primary)'
+            } as React.CSSProperties}
+            whileHover={{
+              filter: "brightness(1.1)",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)"
             }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}

@@ -52,8 +52,9 @@ export default function Home() {
   }, []);
 
   return (
-    <motion.div 
-      className="min-h-screen bg-gray-50"
+    <motion.div
+      className="min-h-screen"
+      style={{ backgroundColor: 'var(--background)' }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -70,10 +71,10 @@ export default function Home() {
         transition={{ duration: 0.6, delay: 0.3 }}
       >
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: 'var(--foreground)' }}>
             Featured Products
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="mt-4 text-lg" style={{ color: 'var(--secondary)' }}>
             Discover our handpicked selection of beautiful charms
           </p>
         </div>
@@ -85,7 +86,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
           >
-            <p className="text-gray-500 text-lg">Loading products...</p>
+            <p className="text-lg" style={{ color: 'var(--secondary)' }}>Loading products...</p>
           </motion.div>
         ) : featuredProducts.length > 0 ? (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -107,7 +108,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
           >
-            <p className="text-gray-500 text-lg">
+            <p className="text-lg" style={{ color: 'var(--secondary)' }}>
               No products available yet. Check back soon!
             </p>
           </motion.div>
@@ -115,8 +116,9 @@ export default function Home() {
       </motion.section>
 
       {/* Call to Action Section */}
-      <motion.section 
-        className="bg-pink-600 py-16"
+      <motion.section
+        className="py-16"
+        style={{ backgroundColor: 'var(--primary)' }}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.7 }}
@@ -125,12 +127,13 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-white">
             Ready to find your perfect charm?
           </h2>
-          <p className="mt-4 text-lg text-pink-100">
+          <p className="mt-4 text-lg text-white opacity-90">
             Browse our full collection and discover unique pieces made just for you
           </p>
           <motion.a
             href="/shop"
-            className="mt-8 inline-block rounded-full bg-white px-8 py-3 text-base font-semibold text-pink-600 shadow-lg"
+            className="mt-8 inline-block rounded-full px-8 py-3 text-base font-semibold shadow-lg"
+            style={{ backgroundColor: 'var(--background)', color: 'var(--primary)' }}
             whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(255, 255, 255, 0.5)" }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}

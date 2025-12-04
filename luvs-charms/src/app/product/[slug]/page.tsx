@@ -49,9 +49,10 @@ async function getProduct(slug: string): Promise<Product | null> {
 export default async function ProductDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const product = await getProduct(params.slug);
+  const { slug } = await params;
+  const product = await getProduct(slug);
 
   if (!product) {
     notFound();
@@ -89,12 +90,13 @@ export default async function ProductDetailPage({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--background)' }}>
       <div className="max-w-7xl mx-auto">
         {/* Back to Shop Link */}
-        <Link 
+        <Link
           href="/shop"
-          className="inline-flex items-center text-pink-600 hover:text-pink-700 mb-8 transition-colors"
+          className="inline-flex items-center mb-8 transition-colors hover:opacity-80"
+          style={{ color: 'var(--primary)' }}
         >
           <svg 
             className="w-5 h-5 mr-2" 
@@ -113,10 +115,10 @@ export default async function ProductDetailPage({
         </Link>
 
         {/* Product Details */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="rounded-lg shadow-lg overflow-hidden" style={{ backgroundColor: 'var(--card-bg)' }}>
           <div className="grid md:grid-cols-2 gap-8 p-8">
             {/* Product Image */}
-            <div className="relative aspect-square overflow-hidden rounded-lg bg-gray-100">
+            <div className="relative aspect-square overflow-hidden rounded-lg" style={{ backgroundColor: 'var(--border)' }}>
               <Image
                 src={imageUrl}
                 alt={product.name}
@@ -129,19 +131,19 @@ export default async function ProductDetailPage({
 
             {/* Product Information */}
             <div className="flex flex-col">
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              <h1 className="text-3xl font-bold mb-4" style={{ color: 'var(--foreground)' }}>
                 {product.name}
               </h1>
 
               {/* Category */}
               {product.category && (
-                <p className="text-sm text-gray-500 mb-4">
-                  Category: <span className="font-medium text-gray-700">{product.category}</span>
+                <p className="text-sm mb-4" style={{ color: 'var(--secondary)' }}>
+                  Category: <span className="font-medium" style={{ color: 'var(--foreground)' }}>{product.category}</span>
                 </p>
               )}
 
               {/* Price */}
-              <p className="text-4xl font-bold text-pink-600 mb-4">
+              <p className="text-4xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
                 ₱{product.price.toFixed(2)}
               </p>
 
@@ -164,10 +166,10 @@ export default async function ProductDetailPage({
               {/* Description */}
               {product.description && product.description.length > 0 && (
                 <div className="prose prose-sm max-w-none">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-3">
+                  <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--foreground)' }}>
                     Description
                   </h2>
-                  <div className="text-gray-700 leading-relaxed">
+                  <div className="leading-relaxed" style={{ color: 'var(--foreground)' }}>
                     <PortableText value={product.description} />
                   </div>
                 </div>
