@@ -9,6 +9,8 @@
 
 Welcome to the official repository for **Luv's Charms**, a specialized e-commerce platform tailored for the Philippine market. This project bridges the gap between automated online shopping and personalized customer service by integrating a unique **"Checkout to Messenger"** workflow.
 
+![Homepage Screenshot](./luvs-charms/public/Screenshot/HomepageLuv's%20Charms%20-%20Handmade%20Jewelry%20&%20Accessories.png)
+
 ---
 
 ## 📖 Table of Contents
