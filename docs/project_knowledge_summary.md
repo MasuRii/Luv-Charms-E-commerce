@@ -106,3 +106,20 @@ Based on the current documentation analysis:
 2.  **Inventory Decrement**: There is no automated stock decrementing. Inventory management relies entirely on the Admin manually changing the `stockStatus` to `outOfStock` in Sanity.
 3.  **Messenger Fallback**: The documentation notes that `m.me` link text support varies. A specific fallback UI (e.g., "Copy to Clipboard" button) should be prioritized in the implementation plan to handle cases where deep linking fails.
 4.  **Contact Information**: The specific phone number (WhatsApp) and Username (Messenger) to be used for the redirection need to be configured as environment variables.
+
+## 7. Implementation Progress
+
+### 7.1 Phase 2: Core Frontend Structure (Completed)
+**Completion Date:** December 2025
+The core user-facing pages have been successfully implemented, connecting the Next.js frontend to the Sanity CMS.
+
+**Key Technical Decisions:**
+*   **Sanity Client:** Configured using `createClient` in `src/sanity/lib/client.ts` to fetch data from the Content Lake.
+*   **Dynamic Routing:** Used Next.js App Router dynamic segments (`src/app/product/[slug]/page.tsx`) to generate individual product pages based on the `slug` field from Sanity.
+*   **Layout Strategy:** Employed CSS Grid via Tailwind CSS for the responsive product grid on the Shop page.
+*   **Image Handling:** Integrated `@sanity/image-url` to optimize image delivery and support hotspot cropping defined in the Studio.
+
+**New Core Components:**
+*   **`Navbar`**: Responsive navigation bar with mobile menu support.
+*   **`Hero`**: Landing page banner component.
+*   **`ProductCard`**: Reusable component for displaying product previews in grids.

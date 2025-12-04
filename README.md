@@ -7,6 +7,8 @@ A modern, cost-effective e-commerce platform built for the Philippines market, f
 ![React](https://img.shields.io/badge/react-v19.2.0-blue)
 ![Tailwind CSS](https://img.shields.io/badge/tailwindcss-v4-38bdf8)
 
+**Current Status:** Phase 2 Complete (Core Frontend Structure Implemented).
+
 ## 🚀 Tech Stack
 
 *   **Framework:** [Next.js 16 (App Router)](https://nextjs.org/)
@@ -14,6 +16,23 @@ A modern, cost-effective e-commerce platform built for the Philippines market, f
 *   **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
 *   **Language:** [TypeScript](https://www.typescriptlang.org/)
 *   **Deployment:** [Vercel](https://vercel.com/)
+
+## ⚡ Quick Start
+
+The main application code is located in the `luvs-charms` directory.
+
+1.  **Navigate to the project folder:**
+    ```bash
+    cd luvs-charms
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
 
 ## 🛠️ Getting Started
 

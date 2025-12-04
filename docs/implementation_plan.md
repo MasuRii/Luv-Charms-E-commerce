@@ -45,15 +45,16 @@ npm install next-sanity @sanity/image-url react-icons clsx tailwind-merge
 
 ### Phase 2: Core Frontend Structure
 **Goal:** Build the user-facing pages and fetch data from the CMS.
+**Status:** ✅ Complete
 
-| ID | Task | Dependencies | Technical Details | Output/Artifacts |
-| :--- | :--- | :--- | :--- | :--- |
-| **2.1** | Setup Sanity Client | 1.2 | Create `lib/sanity.ts`. Export `client` using `createClient`. Configure `imageUrlBuilder`. | `sanity.ts` |
-| **2.2** | Global Layout & Navbar | 1.1 | Create `app/layout.tsx` and `components/Navbar.tsx`. Include responsive menu and placeholder Cart icon. | Responsive Header |
-| **2.3** | Home Page | 2.1 | `app/page.tsx`. Fetch "Featured" products (limit 4). Create `Hero` component. | Landing Page |
-| **2.4** | Shop Page (Catalog) | 2.1 | `app/shop/page.tsx`. Fetch all products. Implement basic mapping to `ProductCard`. | Grid View of Products |
-| **2.5** | Product Card Component | 2.4 | `components/ProductCard.tsx`. Display image, title, price. Link to detail page. | Reusable Card Component |
-| **2.6** | Product Detail Page | 2.5 | `app/product/[slug]/page.tsx`. Fetch single product by slug. Render gallery, description (PortableText), and price. | Dynamic Product Pages |
+| ID | Task | Status | Dependencies | Technical Details | Output/Artifacts |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **2.1** | Setup Sanity Client | ✅ Done | 1.2 | Create `lib/sanity.ts`. Export `client` using `createClient`. Configure `imageUrlBuilder`. | `sanity.ts` |
+| **2.2** | Global Layout & Navbar | ✅ Done | 1.1 | Create `app/layout.tsx` and `components/Navbar.tsx`. Include responsive menu and placeholder Cart icon. | Responsive Header |
+| **2.3** | Home Page | ✅ Done | 2.1 | `app/page.tsx`. Fetch "Featured" products (limit 4). Create `Hero` component. | Landing Page |
+| **2.4** | Shop Page (Catalog) | ✅ Done | 2.1 | `app/shop/page.tsx`. Fetch all products. Implement basic mapping to `ProductCard`. | Grid View of Products |
+| **2.5** | Product Card Component | ✅ Done | 2.4 | `components/ProductCard.tsx`. Display image, title, price. Link to detail page. | Reusable Card Component |
+| **2.6** | Product Detail Page | ✅ Done | 2.5 | `app/product/[slug]/page.tsx`. Fetch single product by slug. Render gallery, description (PortableText), and price. | Dynamic Product Pages |
 
 ### Phase 3: Shopping Cart & State Management
 **Goal:** Allow users to collect items and persist them across sessions.

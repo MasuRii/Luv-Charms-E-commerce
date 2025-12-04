@@ -7,6 +7,13 @@ A modern, cost-effective e-commerce platform built for the Philippines market, f
 ![React](https://img.shields.io/badge/react-v19.2.0-blue)
 ![Tailwind CSS](https://img.shields.io/badge/tailwindcss-v4-38bdf8)
 
+## 🚀 Features (Phase 2)
+
+*   **Home Page**: Featured products and hero section.
+*   **Shop Page**: Full product catalog with grid layout.
+*   **Product Details**: Dynamic pages for individual items (`/product/[slug]`).
+*   **Admin Dashboard**: Integrated Sanity Studio at `/studio`.
+
 ## 🚀 Tech Stack
 
 *   **Framework:** [Next.js 16 (App Router)](https://nextjs.org/)

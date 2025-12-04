@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@portabletext/react": "^5.0.0",
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.20.1",
     "clsx": "^2.1.1",
