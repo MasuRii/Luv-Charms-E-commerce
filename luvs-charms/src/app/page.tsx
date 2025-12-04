@@ -1,3 +1,7 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { client } from '@/sanity/lib/client';
 import Hero from '@/components/Hero';
 import ProductCard from '@/components/ProductCard';
@@ -36,16 +40,35 @@ async function getFeaturedProducts(): Promise<Product[]> {
   }
 }
 
-export default async function Home() {
-  const featuredProducts = await getFeaturedProducts();
+export default function Home() {
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getFeaturedProducts().then((products) => {
+      setFeaturedProducts(products);
+      setLoading(false);
+    });
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <motion.div 
+      className="min-h-screen bg-gray-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Hero Section */}
       <Hero />
 
       {/* Featured Products Section */}
-      <section id="featured" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <motion.section 
+        id="featured" 
+        className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Featured Products
@@ -55,23 +78,49 @@ export default async function Home() {
           </p>
         </div>
 
-        {featuredProducts.length > 0 ? (
+        {loading ? (
+          <motion.div 
+            className="text-center py-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
+            <p className="text-gray-500 text-lg">Loading products...</p>
+          </motion.div>
+        ) : featuredProducts.length > 0 ? (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
+            {featuredProducts.map((product, index) => (
+              <motion.div
+                key={product._id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+              >
+                <ProductCard product={product} />
+              </motion.div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-12">
+          <motion.div 
+            className="text-center py-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
             <p className="text-gray-500 text-lg">
               No products available yet. Check back soon!
             </p>
-          </div>
+          </motion.div>
         )}
-      </section>
+      </motion.section>
 
       {/* Call to Action Section */}
-      <section className="bg-pink-600 py-16">
+      <motion.section 
+        className="bg-pink-600 py-16"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.7 }}
+      >
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-white">
             Ready to find your perfect charm?
@@ -79,14 +128,17 @@ export default async function Home() {
           <p className="mt-4 text-lg text-pink-100">
             Browse our full collection and discover unique pieces made just for you
           </p>
-          <a
+          <motion.a
             href="/shop"
-            className="mt-8 inline-block rounded-full bg-white px-8 py-3 text-base font-semibold text-pink-600 shadow-lg transition-all duration-300 hover:bg-pink-50 hover:shadow-xl hover:scale-105"
+            className="mt-8 inline-block rounded-full bg-white px-8 py-3 text-base font-semibold text-pink-600 shadow-lg"
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(255, 255, 255, 0.5)" }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
           >
             View All Products
-          </a>
+          </motion.a>
         </div>
-      </section>
-    </div>
+      </motion.section>
+    </motion.div>
   );
 }

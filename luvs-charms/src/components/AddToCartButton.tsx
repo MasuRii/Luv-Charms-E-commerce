@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
+import { motion } from 'framer-motion';
 
 interface AddToCartButtonProps {
   product: {
@@ -30,7 +31,7 @@ export default function AddToCartButton({ product, isOutOfStock }: AddToCartButt
   };
 
   return (
-    <button
+    <motion.button
       onClick={handleAddToCart}
       disabled={isOutOfStock}
       className={`w-full py-4 px-6 rounded-lg font-semibold text-white transition-all duration-300 mb-6 ${
@@ -38,10 +39,27 @@ export default function AddToCartButton({ product, isOutOfStock }: AddToCartButt
           ? 'bg-gray-300 cursor-not-allowed'
           : isAdded
           ? 'bg-green-600 hover:bg-green-700'
-          : 'bg-pink-600 hover:bg-pink-700 hover:shadow-lg active:scale-95'
+          : 'bg-pink-600 hover:bg-pink-700 hover:shadow-lg'
       }`}
+      whileHover={!isOutOfStock ? { scale: 1.02 } : {}}
+      whileTap={!isOutOfStock ? { scale: 0.95 } : {}}
+      animate={isAdded ? {
+        scale: [1, 1.1, 1],
+      } : {}}
+      transition={{
+        duration: 0.3,
+        ease: "easeInOut"
+      }}
     >
-      {isOutOfStock ? 'Out of Stock' : isAdded ? '✓ Added to Cart!' : 'Add to Cart'}
-    </button>
+      <motion.span
+        initial={{ opacity: 1 }}
+        animate={isAdded ? {
+          opacity: [1, 0, 1],
+        } : {}}
+        transition={{ duration: 0.3 }}
+      >
+        {isOutOfStock ? 'Out of Stock' : isAdded ? '✓ Added to Cart!' : 'Add to Cart'}
+      </motion.span>
+    </motion.button>
   );
 }

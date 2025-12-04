@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
-/* Default Theme */
+/* Default Theme - Light Mode */
 :root,
-[data-theme="default"] {
+[data-theme="default"][data-mode="light"],
+[data-theme="default"]:not([data-mode]) {
   --background: #ffffff;
   --foreground: #171717;
   --primary: #db2777;
@@ -14,8 +15,22 @@
   --border: #e5e7eb;
 }
 
-/* Sage Green Theme */
-[data-theme="sage"] {
+/* Default Theme - Dark Mode */
+[data-theme="default"][data-mode="dark"] {
+  --background: #0f0f0f;
+  --foreground: #ededed;
+  --primary: #ec4899;
+  --primary-hover: #f472b6;
+  --secondary: #9ca3af;
+  --accent: #fbcfe8;
+  --card-bg: #1a1a1a;
+  --navbar-bg: #1a1a1a;
+  --border: #374151;
+}
+
+/* Sage Green Theme - Light Mode */
+[data-theme="sage"][data-mode="light"],
+[data-theme="sage"]:not([data-mode]) {
   --background: #F0F4F0;
   --foreground: #2d3319;
   --primary: #8A9A5B;
@@ -25,6 +40,19 @@
   --card-bg: #fafcfa;
   --navbar-bg: #ffffff;
   --border: #d4e0c1;
+}
+
+/* Sage Green Theme - Dark Mode */
+[data-theme="sage"][data-mode="dark"] {
+  --background: #1a1f14;
+  --foreground: #e8ede8;
+  --primary: #a4b979;
+  --primary-hover: #b8c99d;
+  --secondary: #7a8a67;
+  --accent: #c5d5a8;
+  --card-bg: #232a1d;
+  --navbar-bg: #232a1d;
+  --border: #3a4631;
 }
 
 @theme inline {
