@@ -29,31 +29,28 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 // CartProvider Component
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [showCart, setShowCart] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  // Handle hydration - only run on client
-  useEffect(() => {
-    setMounted(true);
-    
-    // Load cart from localStorage
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      try {
-        setCartItems(JSON.parse(savedCart));
-      } catch (error) {
-        console.error('Error loading cart from localStorage:', error);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    // Initialize from localStorage on client
+    if (typeof window !== 'undefined') {
+      const savedCart = localStorage.getItem('cart');
+      if (savedCart) {
+        try {
+          return JSON.parse(savedCart);
+        } catch (error) {
+          console.error('Error loading cart from localStorage:', error);
+        }
       }
     }
-  }, []);
+    return [];
+  });
+  const [showCart, setShowCart] = useState(false);
 
   // Persist cart to localStorage whenever it changes
   useEffect(() => {
-    if (mounted) {
+    if (typeof window !== 'undefined') {
       localStorage.setItem('cart', JSON.stringify(cartItems));
     }
-  }, [cartItems, mounted]);
+  }, [cartItems]);
 
   // Calculate total quantity
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);

@@ -17,41 +17,42 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [colorTheme, setColorTheme] = useState<ColorTheme>('default');
-  const [mode, setMode] = useState<Mode>('light');
-  const [mounted, setMounted] = useState(false);
-
-  // Load theme and mode from localStorage on mount
-  useEffect(() => {
-    const savedColorTheme = localStorage.getItem('colorTheme') as ColorTheme | null;
-    const savedMode = localStorage.getItem('mode') as Mode | null;
-    
-    if (savedColorTheme && (savedColorTheme === 'default' || savedColorTheme === 'sage')) {
-      setColorTheme(savedColorTheme);
+  const [colorTheme, setColorTheme] = useState<ColorTheme>(() => {
+    // Initialize from localStorage on client
+    if (typeof window !== 'undefined') {
+      const savedColorTheme = localStorage.getItem('colorTheme') as ColorTheme | null;
+      if (savedColorTheme && (savedColorTheme === 'default' || savedColorTheme === 'sage')) {
+        return savedColorTheme;
+      }
     }
-    
-    if (savedMode && (savedMode === 'light' || savedMode === 'dark')) {
-      setMode(savedMode);
+    return 'default';
+  });
+  const [mode, setMode] = useState<Mode>(() => {
+    // Initialize from localStorage on client
+    if (typeof window !== 'undefined') {
+      const savedMode = localStorage.getItem('mode') as Mode | null;
+      if (savedMode && (savedMode === 'light' || savedMode === 'dark')) {
+        return savedMode;
+      }
     }
-    
-    setMounted(true);
-  }, []);
+    return 'light';
+  });
 
   // Save color theme to localStorage and update data attribute
   useEffect(() => {
-    if (mounted) {
+    if (typeof window !== 'undefined') {
       localStorage.setItem('colorTheme', colorTheme);
       document.documentElement.setAttribute('data-theme', colorTheme);
     }
-  }, [colorTheme, mounted]);
+  }, [colorTheme]);
 
   // Save mode to localStorage and update data attribute
   useEffect(() => {
-    if (mounted) {
+    if (typeof window !== 'undefined') {
       localStorage.setItem('mode', mode);
       document.documentElement.setAttribute('data-mode', mode);
     }
-  }, [mode, mounted]);
+  }, [mode]);
 
   const toggleColorTheme = () => {
     setColorTheme(prev => prev === 'default' ? 'sage' : 'default');

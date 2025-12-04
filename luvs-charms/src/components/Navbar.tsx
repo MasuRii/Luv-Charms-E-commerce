@@ -2,15 +2,22 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 import { useTheme } from '@/context/ThemeContext';
 import { useCart } from '@/context/CartContext';
 
 export default function Navbar() {
   const { colorTheme, mode, toggleColorTheme, toggleMode } = useTheme();
   const { totalQuantity, setShowCart } = useCart();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-md transition-colors duration-300" style={{ backgroundColor: 'var(--navbar-bg)' }}>
+    <nav className="shadow-md transition-all duration-300" style={{ backgroundColor: 'var(--navbar-bg)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo/Title */}
@@ -139,7 +146,7 @@ export default function Navbar() {
                 />
               </svg>
               {/* Cart badge */}
-              {totalQuantity > 0 && (
+              {mounted && totalQuantity > 0 && (
                 <span
                   className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 rounded-full"
                   style={{ backgroundColor: 'var(--primary)' }}

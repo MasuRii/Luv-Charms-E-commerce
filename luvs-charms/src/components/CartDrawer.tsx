@@ -43,7 +43,7 @@ export default function CartDrawer() {
           
           {/* Drawer */}
           <motion.div
-            className="fixed right-0 top-0 h-full w-full max-w-md shadow-xl z-50"
+            className="fixed right-0 top-0 h-full w-full sm:max-w-md shadow-xl z-50"
             style={{ backgroundColor: 'var(--card-bg)' }}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
@@ -80,7 +80,7 @@ export default function CartDrawer() {
               </div>
 
               {/* Cart Items */}
-              <div className="flex-1 overflow-y-auto p-6">
+              <div className="flex-1 overflow-y-auto p-4 sm:p-6">
                 {cartItems.length === 0 ? (
                   <motion.div 
                     className="flex flex-col items-center justify-center h-full text-center"
@@ -137,7 +137,7 @@ export default function CartDrawer() {
                             <div className="flex items-center gap-3 mt-2">
                               <motion.button
                                 onClick={() => toggleCartItemQuantity(item.id, 'dec')}
-                                className="w-8 h-8 flex items-center justify-center border rounded-md transition-colors hover:opacity-80"
+                                className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center border rounded-md transition-colors hover:opacity-80"
                                 style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)' }}
                                 aria-label="Decrease quantity"
                                 whileHover={{ scale: 1.1 }}
@@ -161,7 +161,7 @@ export default function CartDrawer() {
                               
                               <motion.button
                                 onClick={() => toggleCartItemQuantity(item.id, 'inc')}
-                                className="w-8 h-8 flex items-center justify-center border rounded-md transition-colors hover:opacity-80"
+                                className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center border rounded-md transition-colors hover:opacity-80"
                                 style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)' }}
                                 aria-label="Increase quantity"
                                 whileHover={{ scale: 1.1 }}
